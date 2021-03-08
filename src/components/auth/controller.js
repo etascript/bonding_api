@@ -35,13 +35,13 @@ const login = (username, password) => {
 
 const forgotPassword = (req, res, email) => {
     return new Promise((resolve, reject) => {
-        console.log(email);
+        // console.log(email);
         store.findByEmail(email)
             .then(bonding => {
                 data = bonding[0][0];
                 let password = generadorPassword(10);
                 if (bonding[0].length > 0) {
-                    store.updatePassBDG(data.email, data.username, password)
+                    store.updatePassBDG(data.email, password)
                     .then(resp => {
                         if (resp.check) {
                             sendMail(data.email, password);

@@ -38,7 +38,7 @@ const insert = (req) => {
 
 const update = (req) => {
     let bdg = {
-        sid_dic_contextura: req.params.id,
+        sid_rol_bonding: req.params.id,
         nombre: req.body.nombre,
         activo: req.body.activo
     }
@@ -46,7 +46,7 @@ const update = (req) => {
         dbConn.query(store.showOne, [req.params.id], (error, bonding) => {
             if (error) reject(error);
             if (bonding[0].length > 0) {
-                dbConn.query(store.updateData, [bdg.sid_dic_contextura, bdg.nombre, bdg.activo], (error, dicSexos) => {
+                dbConn.query(store.update, [ bdg.nombre, bdg.activo, bdg.sid_rol_bonding], (error, dicSexos) => {
                     if (error) reject(error);
                     resolve({ message: "Registro Actualizado!", data: bdg });
                 })
@@ -63,7 +63,7 @@ const deleteObj = (req) => {
         dbConn.query(store.showOne, [req.params.id], (error, bonding) => {
             if (error) reject(error);
             if (bonding[0].length > 0) {
-                dbConn.query(store.deleteData, [sid_dic_contextura], (error, registro) => {
+                dbConn.query(store.delete, [sid_dic_contextura], (error, registro) => {
                     if (error) reject(error);
                     resolve({ message: "Registro Eliminado!" });
                 })
